@@ -457,13 +457,15 @@ router.delete('/image/:_id',async (req, res)=>{
     }).catch(err=>err)
 console.log(image_temp);
     await Image.findByIdAndDelete(_id).then( async ()=>{
-      await Album.updateOne({_id: image_temp.album},{
+      if(image_temp.album){
+         await Album.updateOne({_id: image_temp.album},{
        $pull:{images:{$in:[image_temp._id]}}
      });
-     let album =  await Album.findById(image_temp._id).then(alb=>alb).toObject().catch(err=>err)
-   const images = Image.find({album:image_temp.album }).then(imgs=>imgs).catch(err=>err);
+      let album =  await Album.findById(image_temp._id).then(alb=>alb).toObject().catch(err=>err);
+      const images = Image.find({album:image_temp.album }).then(imgs=>imgs).catch(err=>err);
  album.images= images
      res.json(album)
+      }
     }).catch(err=>err);
    
 

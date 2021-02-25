@@ -1,8 +1,14 @@
 <template>
-  <v-dialog @click:outside="$emit('close')" v-if="dialog" :class="isMobile?'dialog_nor':'dialog_not_nor'"  v-model="dialog">
+  <v-dialog :width="width" ref="dia" @click:outside="$emit('close')" v-if="dialog"  v-model="dialog">
     
-    <v-card>
+    <v-card  height="100%">
+      <NestedModal :image='image' v-if="isAdmin"/>
       <v-img
+      width="100%"
+      height="100%"
+      max-height="100%"
+      max-width="100%"
+      ref="image"
         class="white--text align-end"
         :src="
           image.image_name.split('.')[1] === 'jpeg'
@@ -10,26 +16,35 @@
             : image.base64
         "
       >
+      
         <v-card-title v-text="image.caption"></v-card-title>
       </v-img>
     </v-card>
   </v-dialog>
 </template>
 <script>
+import NestedModal from "./NestedModal";
 export default {
   name:'ImageModal',
   data() {
     return {
+      loggedIn:null,
+      newImage:{},
     };
+  },
+  
+  mounted: function () {
+   console.log('mounted')
+  
+
   },
   methods:{
    
   },
-  mounted: function () {
-    console.log(this.dialog);
-    console.log(this.image);
-    console.log(this.isMobile)
+  created:function(){
+  
   },
+
   props: {
     dialog: {
       type: Boolean,
@@ -41,6 +56,29 @@ export default {
       type: Boolean,
     },
   },
+  computed:{
+isAdmin(){
+  return this.$store.getters.loggedIn;
+},
+width(){
+  return this.newImage.height> this.newImage.width?"44%":"91%";
+}
+
+  },
+  watch:{
+image(){
+  this.$nextTick(()=>{
+    console.log(this.$refs.image)
+ let imgNew= new Image()
+  imgNew.src= this.$refs.image.src
+   this.newImage= imgNew;
+  
+  })
+}
+  },
+  components:{
+    NestedModal,
+  }
   
 };
 </script>
@@ -57,11 +95,11 @@ export default {
     position: fixed;
     top: 2%;
     transition: 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), z-index 1ms;
-    width: 67%;
+    width: 62%;
     z-index: 6;
     outline: none;
 }
-.dialog_nor.v-dialog:not(.v-dialog--fullscreen) {
-    
+.v-dialog:not(.v-dialog--fullscreen) {
+    max-height: 100%;
 }
 </style>

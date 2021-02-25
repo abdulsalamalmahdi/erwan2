@@ -2,7 +2,7 @@
   <div>
     <!-- error dialog -->
     <v-row justify="center">
-      <v-dialog v-model="errors" persistent max-width="300">
+      <v-dialog v-model="serverError" persistent max-width="300">
         <v-card>
           <v-card-title class="red--text headline"> Error </v-card-title>
           <v-card-text>{{ serverError }}</v-card-text>
@@ -300,7 +300,7 @@ async supmit() {
         .catch((err) => {
           console.log(err.response.data);
           this.serverError = err.response.data;
-          this.errors = true;
+        
           this.successMsg = "";
         });
       this.newAlbum = false;

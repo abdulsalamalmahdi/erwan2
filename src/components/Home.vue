@@ -31,6 +31,7 @@
         class="d-flex child-flex ma-0 pa-0"
         :cols="isMobile ? 4 : 1"
       >
+      
         <v-img
           @click="open(n)"
           @close="close"
@@ -42,6 +43,9 @@
           aspect-ratio="1"
           class="grey lighten-2"
         >
+         <v-btn v-if="!n.album && isAdmin" icon color="primary" @click="deleteImg(n)">
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
           <template v-slot:placeholder>
             <v-row class="fill-height ma-0" align="center" justify="center">
               <v-progress-circular
@@ -110,6 +114,7 @@ export default {
       })
       .catch((err) => err);
     this.images.map((n) => console.log(n._id));
+    
   },
   methods: {
     close() {
@@ -133,11 +138,34 @@ export default {
       console.log(this.viewImage);
       console.log(this.image_dialog);
     },
+     deleteImg(n) {
+      let img = this.images.find((im) => im._id === n._id);
+      if (img) {
+        const ind = this.images.indexOf(img);
+        this.images.splice(ind, 1);
+      }
+
+      axios
+        .delete(`http://localhost:4000/api/image/${n._id}`, {
+          name: this.curr_album.name,
+        })
+        .then((dt) => {
+          console.log(dt.data);
+          this.curr_album = dt.data;
+          this.images = this.curr_album.iamges;
+
+          //  this.$forceUpdate()
+        })
+        .catch((err) => console.log(err));
+    },
   },
   computed: {
     exibitions: function () {
       return this.albums.find((al) => al.category === "exibition");
     },
+     isAdmin(){
+      return this.$store.getters.loggedIn;
+    }
   },
   components: {
     ImageModal,

@@ -605,7 +605,7 @@ export default {
         .then((dt) => {
           console.log(dt.data);
           this.curr_album = dt.data;
-          this.images = this.curr_album.iamges;
+          this.images = this.curr_album.images;
 
           //  this.$forceUpdate()
         })
