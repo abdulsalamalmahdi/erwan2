@@ -11,6 +11,7 @@
       <!-- gallery -->
 
       <ImageModal
+    @fetchImgs='fetchImgs'
         v-if="!isMobile"
         @close="close"
         :isMobile="isMobile"
@@ -117,6 +118,16 @@ export default {
     
   },
   methods: {
+    fetchImgs(){
+      console.log('home emitted')
+       axios
+      .get(`http://localhost:4000/api/images/`)
+      .then((data) => {
+        console.log(data.data);
+        this.images = data.data;
+      })
+      .catch((err) => err);
+    },
     close() {
       this.dialog = false;
       this.viewImage = {};

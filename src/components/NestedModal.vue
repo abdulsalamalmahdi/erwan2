@@ -61,6 +61,7 @@ import axios from 'axios';
         .then(async (dt) => {
           console.log(dt);
           this.dialog=false;
+          this.$emit('fetchImgs')
         })
         .catch((err) => err);
         }

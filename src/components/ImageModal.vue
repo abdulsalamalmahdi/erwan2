@@ -2,7 +2,7 @@
   <v-dialog :width="width" ref="dia" @click:outside="$emit('close')" v-if="dialog"  v-model="dialog">
     
     <v-card  height="100%">
-      <NestedModal :image='image' v-if="isAdmin"/>
+      <NestedModal v-on="$listeners"  :image='image' v-if="isAdmin && !image.album"/>
       <v-img
       width="100%"
       height="100%"
