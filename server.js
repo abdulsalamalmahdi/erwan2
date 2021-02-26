@@ -1,8 +1,8 @@
 let express = require('express'),
   mongoose = require('mongoose'),
   cors = require('cors'),
-  bodyParser = require('body-parser'),
-  dbConfig = require('./db/database');
+  bodyParser = require('body-parser');
+ // dbConfig = require('./db/database');
 
 
 // Routes to Handle Request
@@ -11,7 +11,10 @@ const passport = require("passport");
 
 // MongoDB Setup
 mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.db, {
+mongoose.connect(
+ // dbConfig.db,
+"mongodb+srv://erwan:erwan@123@uploads.pwizx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
