@@ -1,8 +1,8 @@
 let express = require('express'),
   mongoose = require('mongoose'),
   cors = require('cors'),
-  bodyParser = require('body-parser'),
-  dbConfig = require('./db/database');
+  bodyParser = require('body-parser');
+  //dbConfig = require('./db/database');
 
 
 // Routes to Handle Request
@@ -10,8 +10,16 @@ const userRoute = require('./routers')
 const passport = require("passport");
 
 // MongoDB Setup
+
+
 mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.db, {
+let mongoUrl;
+ if (process.env.NODE_ENV === "production") {
+  mongoUrl = process.env.DB;
+ } else {
+   mongoUrl = "mongodb://localhost:27017/chat";
+ }
+mongoose.connect(mongoUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
@@ -24,6 +32,14 @@ mongoose.connect(dbConfig.db, {
 
 // Setup Express.js
 const app = express();
+if (process.env.NODE_ENV === 'production') {
+  // Static folder
+  app.use(express.static( __dirname + '/dist/'));
+
+  // Handle SPA
+app.get(/.*/, function (req, res) { res.sendFile( __dirname + '/dist/index.html') });
+}
+
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({
   extended: true,
