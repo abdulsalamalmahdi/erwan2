@@ -34,10 +34,12 @@ app.use(bodyParser.urlencoded({
   parameterLimit: 1000000
 }));
 app.use(cors());
-
+app.get("/.*", function(req, res){
+  res.sendFile(__dirname + "/dist/index.html");
+})
 
 // Make Images "Uploads" Folder Publicly Available
-app.use('/public', express.static('public'));
+app.use( express.static(__dirname + "/dist/"));
 
 
 // API Route
