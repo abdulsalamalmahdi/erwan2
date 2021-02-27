@@ -98,6 +98,7 @@ image(){
     width: 62%;
     z-index: 6;
     outline: none;
+
 }
 .v-dialog:not(.v-dialog--fullscreen) {
     max-height: 100%;
