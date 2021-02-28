@@ -423,7 +423,7 @@ export default {
   }),
   mounted: function () {
     axios
-      .get(`http://localhost:4000/api/album/${this.$route.params._id}`)
+      .get(`/album/${this.$route.params._id}`)
       .then((dt) => {
       
         this.curr_album = dt.data;
@@ -432,7 +432,7 @@ export default {
       .catch((err) => console.log(err));
   
     axios
-      .get(`http://localhost:4000/api/image/${this.$route.params._id}`)
+      .get(`/image/${this.$route.params._id}`)
       .then((dt) => {
        
         this.main = dt.data;
@@ -491,7 +491,7 @@ export default {
       try {
         await axios
           .post(
-            `http://localhost:4000/api/album/${this.$route.params._id}`,
+            `/album/${this.$route.params._id}`,
             formData
           )
           .then((result) => {
@@ -507,7 +507,7 @@ export default {
       console.log("des");
 
       axios
-        .post(`http://localhost:4000/api/album/${this.$route.params._id}`, {
+        .post(`/album/${this.$route.params._id}`, {
           desc: this.description,
         })
         .then(async (dt) => {
@@ -520,7 +520,7 @@ export default {
     submitCap(n, cap) {
       console.log(cap);
       axios
-        .post(`http://localhost:4000/api/image/${n._id}`, {
+        .post(`/image/${n._id}`, {
           caption: cap,
         })
         .then(async (dt) => {
@@ -535,7 +535,7 @@ export default {
       this.main_id = n._id;
 
       await axios
-        .post(`http://localhost:4000/api/image/${this.main_id}`, {
+        .post(`/image/${this.main_id}`, {
           main: !!n.main,
         })
         .then(async (dt) => {
@@ -548,7 +548,7 @@ export default {
     },
     accept() {
       axios
-        .get(`http://localhost:4000/api/image/${this.$route.params._id}`)
+        .get(`/image/${this.$route.params._id}`)
         .then((dt) => {
           // console.log(dt.data);
           this.main = dt.data;
@@ -580,7 +580,7 @@ export default {
 
     deleteAlbum() {
       axios
-        .delete(`http://localhost:4000/api/album/${this.$route.params._id}`, {
+        .delete(`/album/${this.$route.params._id}`, {
           name: this.curr_album.name,
         })
         .then(() => {
@@ -599,7 +599,7 @@ export default {
       }
 
       axios
-        .delete(`http://localhost:4000/api/image/${n._id}`, {
+        .delete(`/image/${n._id}`, {
           name: this.curr_album.name,
         })
         .then((dt) => {

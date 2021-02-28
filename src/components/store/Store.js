@@ -3,7 +3,7 @@ import Vue from "vue";
 import axios from "axios";
 
 Vue.use(Vuex);
-axios.defaults.baseURL = "http://localhost:4000/api";
+axios.defaults.baseURL = "/api";
 const state = {
   user: {},
   albums:[],
@@ -49,7 +49,7 @@ commit('login_mutation',opts)
       axios
         .post("/login", opts)
         .then( (res) => {
-          //console.log(res)
+          console.log(res)
           const token = res.data.token;
           const _id = res.data.user._id;
          // console.log(res.data.user._id);

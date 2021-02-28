@@ -103,7 +103,7 @@ export default {
     console.log(this.isAdmin)
     this.loggedIn = this.$store.getters.loggedIn;
     axios
-      .get(`http://localhost:4000/api/albums`)
+      .get(`/albums`)
       .then((dt) => {
         console.log(dt);
         this.albums = dt.data;
@@ -111,7 +111,7 @@ export default {
       .catch((err) => err);
 
     axios
-      .get(`http://localhost:4000/api/albums/exibitions`)
+      .get(`/albums/exibitions`)
       .then((dt) => {
         this.exibitions = dt.data;
         console.log(this.exibitions);
@@ -119,14 +119,14 @@ export default {
       .catch((err) => err);
 
     axios
-      .get(`http://localhost:4000/api/albums/projects`)
+      .get(`/albums/projects`)
       .then((dt) => {
         this.projects = dt.data;
       })
       .catch((err) => err);
 
        axios
-      .get(`http://localhost:4000/api/albums/workshops`)
+      .get(`/albums/workshops`)
       .then((dt) => {
         this.workshops = dt.data;
       })

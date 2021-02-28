@@ -215,7 +215,7 @@ export default {
   mounted() {
     console.log(this.select);
     axios
-      .get("http://localhost:4000/api/albums")
+      .get("/albums")
       .then(async (dt) => {
         this.albums.push(...dt.data);
         console.log(this.albums[0].name);
@@ -269,7 +269,7 @@ async supmit() {
       try {
         await axios
           .post(
-            `http://localhost:4000/api/album/random`,
+            `/album/random`,
             formData
           )
           .then((result) => {
@@ -284,7 +284,7 @@ async supmit() {
     async validate() {
       this.$refs.form.validate();
       await axios
-        .post("http://localhost:4000/api/albums", {
+        .post("/albums", {
           name: this.album_name,
           category: this.select,
         })

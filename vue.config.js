@@ -1,6 +1,21 @@
+const path =require('path')
 module.exports = {
-  "devServer": {
-    "host": "localhost"
+  // outputDir: path.resolve(__dirname, ''),
+  // proxyTable: {
+  //   '/api': {
+  //     target: 'http://localhost:4000/',
+  //     changeOrigin: true,
+  //     pathRewrite: {
+  //       '^/api': ''
+  //     }
+  //   }},
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000/',
+        changeOrigin: true
+      }
+    }
   },
   "transpileDependencies": [
     "vuetify"

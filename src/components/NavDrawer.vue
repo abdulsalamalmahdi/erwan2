@@ -97,7 +97,7 @@ export default {
   mounted: function () {
     console.log(this.hide_main_menu)
     axios
-      .get(`http://localhost:4000/api/albums/exibitions`)
+      .get(`/albums/exibitions`)
       .then((dt) => {
         this.exibitions = dt.data;
         console.log(this.exibitions);
@@ -105,7 +105,7 @@ export default {
       .catch((err) => err);
 
     axios
-      .get(`http://localhost:4000/api/albums/projects`)
+      .get(`/albums/projects`)
       .then((dt) => {
         this.projects = dt.data;
       })

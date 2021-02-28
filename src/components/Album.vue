@@ -233,7 +233,7 @@ export default {
     addDesc(n, desc) {
       console.log(desc);
       axios
-        .put(`http://localhost:4000/api/image/${n._id}`, { desc: desc })
+        .put(`/image/${n._id}`, { desc: desc })
         .then((dt) => {
           console.log(dt.data);
             this.el_textArea = n;
@@ -293,7 +293,7 @@ export default {
     console.log(this.$route.params._id);
     console.log(this.isMobile);
     axios
-      .get(`http://localhost:4000/api/album/${this.$route.params._id}`)
+      .get(`/album/${this.$route.params._id}`)
       .then((dt) => {
         console.log(dt.data);
         this.album = dt.data;
@@ -301,7 +301,7 @@ export default {
       .catch((err) => console.log(err));
 
     axios
-      .get(`http://localhost:4000/api/albums/exibitions`)
+      .get(`/albums/exibitions`)
       .then((dt) => {
         this.exibitions = dt.data;
         console.log(this.exibitions);
@@ -309,7 +309,7 @@ export default {
       .catch((err) => err);
 
     axios
-      .get(`http://localhost:4000/api/albums/projects`)
+      .get(`/albums/projects`)
       .then((dt) => {
         this.projects = dt.data;
       })

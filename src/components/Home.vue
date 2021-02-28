@@ -85,7 +85,7 @@ export default {
   mounted: function () {
     console.log(this.image_dialog);
     axios
-      .get(`http://localhost:4000/api/albums/`)
+      .get(`/albums/`)
       .then((data) => {
         console.log(data);
         this.albums = data.data;
@@ -93,7 +93,7 @@ export default {
       .catch((err) => err);
 
     axios
-      .get(`http://localhost:4000/api/images/`)
+      .get(`/images/`)
       .then((data) => {
         console.log(data.data);
         this.images = data.data;
@@ -101,7 +101,7 @@ export default {
       .catch((err) => err);
 
     axios
-      .get(`http://localhost:4000/api/albums/exibitions`)
+      .get(`/albums/exibitions`)
       .then((dt) => {
         this.exibitions = dt.data;
         console.log(this.exibitions);
@@ -109,7 +109,7 @@ export default {
       .catch((err) => err);
 
     axios
-      .get(`http://localhost:4000/api/albums/projects`)
+      .get(`/albums/projects`)
       .then((dt) => {
         this.projects = dt.data;
       })
@@ -121,7 +121,7 @@ export default {
     fetchImgs(){
       console.log('home emitted')
        axios
-      .get(`http://localhost:4000/api/images/`)
+      .get(`/images/`)
       .then((data) => {
         console.log(data.data);
         this.images = data.data;
@@ -157,7 +157,7 @@ export default {
       }
 
       axios
-        .delete(`http://localhost:4000/api/image/${n._id}`, {
+        .delete(`/image/${n._id}`, {
           name: this.curr_album.name,
         })
         .then((dt) => {

@@ -271,9 +271,10 @@ router.post('/albums', async (req, res) => {
 
 //get all albums
 router.get("/albums", (req, res) => {
+
   Album.find().then(async data => {
-
-
+     
+    res.header('Access-Control-Allow-Origin','*')
     res.status(200).send(
       data
     );

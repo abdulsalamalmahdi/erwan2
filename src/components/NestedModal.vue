@@ -55,7 +55,7 @@ import axios from 'axios';
     },
     methods:{
         submitCap(){
- axios.post(`http://localhost:4000/api/image/${this.image._id}`, {
+ axios.post(`/image/${this.image._id}`, {
           caption: this.cap,
         })
         .then(async (dt) => {

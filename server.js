@@ -32,13 +32,15 @@ mongoose.connect(mongoUrl, {
 
 // Setup Express.js
 const app = express();
-if (process.env.NODE_ENV === 'production') {
-  // Static folder
+app.options('*', cors())
+// if (process.env.NODE_ENV === 'production') {
+  // Static folder 
+  app.use(cors());
   app.use(express.static( __dirname + '/dist/'));
 
   // Handle SPA
-app.get(/.*/, function (req, res) { res.sendFile( __dirname + '/dist/index.html') });
-}
+// app.get(/.*/, function (req, res) { res.sendFile( __dirname + '/dist/index.html') });
+// }
 
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({
@@ -46,11 +48,11 @@ app.use(bodyParser.urlencoded({
   limit: '50mb',
   parameterLimit: 1000000
 }));
-app.use(cors());
+
 
 
 // Make Images "Uploads" Folder Publicly Available
-app.use('/public', express.static('public'));
+//app.use('/public', express.static('public'));
 
 
 // API Route

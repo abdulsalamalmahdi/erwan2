@@ -61,7 +61,7 @@ export default {
   }),
   mounted: function () {
     axios
-      .get(`http://localhost:4000/api/albums`)
+      .get(`/albums`)
       .then((dt) => {
         console.log(dt);
         this.exibitions = dt.data;
