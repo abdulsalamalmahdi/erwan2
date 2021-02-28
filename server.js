@@ -36,10 +36,11 @@ app.options('*', cors())
 // if (process.env.NODE_ENV === 'production') {
   // Static folder 
   app.use(cors());
+
   app.use(express.static( __dirname + '/dist/'));
 
   // Handle SPA
-// app.get(/.*/, function (req, res) { res.sendFile( __dirname + '/dist/index.html') });
+app.get(/.*/, function (req, res) { res.sendFile( __dirname + '/dist/index.html') });
 // }
 
 app.use(bodyParser.json({limit: '50mb'}));
