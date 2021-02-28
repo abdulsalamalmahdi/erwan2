@@ -19,7 +19,7 @@ let mongoUrl;
  } else {
    mongoUrl = "mongodb://localhost:27017/chat";
  }
-mongoose.connect(mongoUrl, {
+mongoose.connect(process.env.DB, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
