@@ -84,7 +84,7 @@
       <v-img
         class="white--text align-end"
         v-else
-        src="http://www.wonderauto.ch/application/modules/themes/views/default/assets/images/image-placeholder.png"
+      :src="require('../assets/image-placeholder.png')"
       >
         <v-card-title v-text="curr_album.category"></v-card-title
       ></v-img>

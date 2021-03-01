@@ -25,7 +25,7 @@
       </v-img>
       <v-img
         v-else
-        src="http://www.wonderauto.ch/application/modules/themes/views/default/assets/images/image-placeholder.png"
+        :src="require('../assets/image-placeholder.png')"
       >
       </v-img>
       <v-card-subtitle>
@@ -142,7 +142,7 @@
       ></v-img>
       <v-img
         v-else
-        src="http://www.wonderauto.ch/application/modules/themes/views/default/assets/images/image-placeholder.png"
+         :src="require('../assets/image-placeholder.png')"
       >
         <v-card-title v-text="album.category"></v-card-title>
       </v-img>
