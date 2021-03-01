@@ -4,6 +4,7 @@ import axios from "axios";
 
 Vue.use(Vuex);
 axios.defaults.baseURL = "/api";
+
 const state = {
   user: {},
   albums:[],

@@ -81,7 +81,9 @@ export default {
   mounted: function () {
     console.log(this.image_dialog);
     axios
-      .get(`/albums/`)
+      .get(`/albums/`,{headers:{
+          'Content-Type': 'application/json'
+      }})
       .then((data) => {
         console.log(data);
         this.albums = data.data;

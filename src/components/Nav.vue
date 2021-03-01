@@ -103,7 +103,9 @@ export default {
    
     this.loggedIn = this.$store.getters.loggedIn;
     axios
-      .get(`/albums`)
+      .get(`/albums`,{headers:{
+          'Content-Type': 'application/json'
+      }})
       .then((dt) => {
         console.log(dt);
         this.albums = dt.data;

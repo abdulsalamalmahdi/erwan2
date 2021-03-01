@@ -33,15 +33,19 @@ mongoose.connect(process.env.DB, {
 // Setup Express.js
 const app = express();
 app.options('*', cors())
-// if (process.env.NODE_ENV === 'production') {
-  // Static folder 
+
   app.use(cors());
 
-  app.use(express.static( __dirname + '/dist/'));
+  // app.use(express.static( __dirname + '/dist/'));
 
-  // Handle SPA
-app.get(/.*/, function (req, res) { res.sendFile( __dirname + '/dist/index.html') });
-// }
+ 
+// app.get(/.*/, function (req, res) { res.sendFile( __dirname + '/dist/index.html') });
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(resolve(process.cwd(), '/dist')))
+  app.get('*', (req, res) => {
+    res.sendFile(resolve(process.cwd(), '/dist/index.html'))
+  })
+}
 
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({
