@@ -2,6 +2,7 @@ let express = require('express'),
   mongoose = require('mongoose'),
   cors = require('cors'),
   bodyParser = require('body-parser');
+  let history = require('connect-history-api-fallback');
   //dbConfig = require('./db/database');
 
 
@@ -35,7 +36,7 @@ const app = express();
 app.options('*', cors())
 
   app.use(cors());
-
+app.use(history());
  
 if (process.env.NODE_ENV === 'production') {
  app.use(express.static( __dirname + '/dist/'));
