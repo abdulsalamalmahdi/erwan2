@@ -19,11 +19,7 @@
       <v-img
         class="white--text align-end main_image"
         v-if="main"
-        :src="
-          main.image_name && main.image_name.split('.')[1] === 'jpeg'
-            ? require(`../../${main.url.replace('./', '')}`)
-            : main.base64
-        "
+        :src="require(`../../${main.url.replace('./', '')}`)"
         height="300px"
       >
       </v-img>
@@ -71,11 +67,7 @@
       </v-btn>
 
       <v-img
-        :src="
-          n.image_name.split('.')[1] === 'jpeg'
-            ? require(`../../${n.url.replace('./', '')}`)
-            : n.base64
-        "
+        :src="require(`../../${n.url.replace('./', '')}`)"
         aspect-ratio="1"
         class="grey lighten-2"
       >
@@ -140,11 +132,7 @@
       <v-img
         class="white--text align-end main_image_mob"
         v-if="main"
-        :src="
-          main.image_name && main.image_name.split('.')[1] === 'jpeg'
-            ? require(`../../${main.url.replace('./', '')}`)
-            : main.base64
-        "
+        :src="require(`../../${main.url.replace('./', '')}`)"
         height="300px"
       >
         <v-card-title
@@ -182,11 +170,7 @@
     <div class="images_mob">
       <v-card v-for="n in album.images" :key="n._id" class="mx-auto ma-2">
         <v-img
-          :src="
-            n.image_name.split('.')[1] === 'jpeg'
-              ? require(`../../${n.url.replace('./', '')}`)
-              : n.base64
-          "
+          :src="require(`../../${n.url.replace('./', '')}`)"
           aspect-ratio="1"
           class="grey lighten-2"
         >

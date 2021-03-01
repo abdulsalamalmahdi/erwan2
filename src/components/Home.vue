@@ -36,11 +36,7 @@
         <v-img
           @click="open(n)"
           @close="close"
-          :src="
-            n.image_name.split('.')[1] === 'jpeg'
-              ? require(`../../${n.url.replace('./', '')}`)
-              : n.base64
-          "
+          :src="require(`../../${n.url.replace('./', '')}`)"
           aspect-ratio="1"
           class="grey lighten-2"
         >

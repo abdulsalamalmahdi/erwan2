@@ -4,11 +4,7 @@
     <v-card>
       <v-img
         class="white--text align-end"
-        :src="
-          image.image_name.split('.')[1] === 'jpeg'
-            ? require(`../../${image.url.replace('./', '')}`)
-            : image.base64
-        "
+        :src="require(`../../${image.url.replace('./', '')}`)"
       >
         <v-card-title v-text="image.caption"></v-card-title>
       </v-img>

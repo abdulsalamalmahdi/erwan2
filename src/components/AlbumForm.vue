@@ -76,11 +76,7 @@
         class="white--text align-end"
         v-if="main"
         height="200px"
-        :src="
-          main && main.image_name.split('.')[1] === 'jpeg'
-            ? require(`../../${main.url.replace('./', '')}`)
-            : main.base64
-        "
+        :src="require(`../../${main.url.replace('./', '')}`)"
       >
         <v-card-title v-text="curr_album.category"></v-card-title>
       </v-img>
@@ -328,11 +324,7 @@
         <v-card class="mx-auto my-12 mt-2 ml-2" max-width="50%">
           <!-- :src="main.image_name.split('.')[1] === 'jpeg'? require(`../../${main.url.replace('./', '')}`):main.base64" -->
           <v-img
-            :src="
-              n.image_name && n.image_name.split('.')[1] === 'jpeg'
-                ? require(`../../${n.url.replace('./', '')}`)
-                : n.base64
-            "
+            :src="require(`../../${n.url.replace('./', '')}`)"
             aspect-ratio="1"
             class="grey lighten-2"
           >
