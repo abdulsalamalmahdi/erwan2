@@ -290,6 +290,7 @@ async supmit() {
         })
         .then((res) => {
           if (res.status === 200) {
+            console.log(res.data)
             this.albums.push(res.data);
             this.loading = false;
             this.success = true;
@@ -305,7 +306,7 @@ async supmit() {
         });
       this.newAlbum = false;
       this.album_name = "";
-      console.log(this.albums);
+     
     },
     chosedAbum(album) {
       console.log(album._id);
