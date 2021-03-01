@@ -36,15 +36,12 @@ app.options('*', cors())
 
   app.use(cors());
 
-  // app.use(express.static( __dirname + '/dist/'));
+ 
+if (process.env.NODE_ENV === 'production') {
+ app.use(express.static( __dirname + '/dist/'));
 
  
-// app.get(/.*/, function (req, res) { res.sendFile( __dirname + '/dist/index.html') });
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(resolve(process.cwd(), '/dist')))
-  app.get('*', (req, res) => {
-    res.sendFile(resolve(process.cwd(), '/dist/index.html'))
-  })
+app.get(/.*/, function (req, res) { res.sendFile( __dirname + '/dist/index.html') });
 }
 
 app.use(bodyParser.json({limit: '50mb'}));
