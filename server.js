@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === 'production') {
  app.use(express.static( __dirname + '/dist/'));
 
  
-app.get(/.*/, function (req, res) { res.sendFile( __dirname + '/dist/index.html') });
+// app.get(/.*/, function (req, res) { res.sendFile( __dirname + '/dist/index.html') });
 }
 
 app.use(bodyParser.json({limit: '50mb'}));
