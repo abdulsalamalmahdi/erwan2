@@ -100,7 +100,7 @@ export default {
     workshops:[],
   }),
   mounted: function () {
-    console.log(this.isAdmin)
+   
     this.loggedIn = this.$store.getters.loggedIn;
     axios
       .get(`/albums`)
@@ -131,6 +131,7 @@ export default {
         this.workshops = dt.data;
       })
       .catch((err) => err);
+      console.log(this.exibitions)
   },
   created:function(){
 
