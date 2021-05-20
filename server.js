@@ -7,7 +7,8 @@ let express = require('express'),
 
 
 // Routes to Handle Request
-const userRoute = require('./routers')
+// const userRoute = require('./routers')
+const userRoute = require('./routes/router');
 const passport = require("passport");
 
 // MongoDB Setup

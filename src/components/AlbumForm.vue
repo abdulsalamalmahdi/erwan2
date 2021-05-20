@@ -282,8 +282,9 @@
       </v-dialog>
     </div>
 
-    <v-row>
+    <v-row v-if="curr_album.images.length > 0">
       <v-col
+      
         v-for="n in curr_album.images"
         :key="n._id"
         class="d-flex child-flex"
