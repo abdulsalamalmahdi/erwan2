@@ -75,7 +75,7 @@
       <v-img
         class="white--text align-end"
         v-if="main"
-        height="200px"
+        height="270px"
         :src="require(`../../${main.url.replace('./', '')}`)"
       >
         <v-card-title v-text="curr_album.category"></v-card-title>
@@ -430,7 +430,7 @@ export default {
         this.main = dt.data;
       })
       .catch((err) => console.log(err));
-    console.log(this.curr_album);
+    //console.log(this.curr_album);
   },
   methods: {
     onChange(e) {
@@ -451,17 +451,17 @@ export default {
       });
 
       let notJPG = objVals.filter(
-        (fl) => fl.type !== "image/jpeg" && fl.type !== "image/tiff"
+        (fl) => fl.type !== "image/jpeg" 
       );
 
       if (notJPG.length > 0) {
         this.notJPG = notJPG;
 
-        // notJPG.map(n=>{ alert(n.name + " is not of type JPEG and removed from your selections")})
+        //  notJPG.map(n=>{ alert(n.name + " is not of type JPEG and removed from your selections")})
         this.showDialog = true;
         this.filesArr = objVals.filter((fl) =>fl.type === "image/jpeg");
       }
-      console.log(this.filesArr);
+      //console.log(this.filesArr);
       this.filesArr.map(async (file) => {
         Object.assign(file, { url: URL.createObjectURL(file) });
         Object.assign(file, { ext: file.name.split(".").pop() });
@@ -479,7 +479,7 @@ export default {
         formData.append("file[]", fl);
       });
 
-      console.log(formData);
+     // console.log(formData);
       try {
         await axios
           .post(
@@ -492,33 +492,33 @@ export default {
           .catch((err) => err);
         this.filesArr = [];
       } catch (err) {
-        console.log(err);
+        //console.log(err);
       }
     },
     submitDes() {
-      console.log("des");
+     // console.log("des");
 
       axios
         .post(`/album/${this.$route.params._id}`, {
           desc: this.description,
         })
         .then(async (dt) => {
-          console.log(dt);
+         // console.log(dt);
           this.description = await dt.data.description;
         })
         .catch((err) => err);
     },
 
     submitCap(n, cap) {
-      console.log(cap);
+     // console.log(cap);
       axios
         .post(`/image/${n._id}`, {
           caption: cap,
         })
         .then(async (dt) => {
-          console.log(dt);
-
-          this.$forceUpdate();
+          //console.log(dt);
+return dt
+     //     this.$forceUpdate();
         })
         .catch((err) => err);
     },
@@ -531,10 +531,10 @@ export default {
           main: !!n.main,
         })
         .then(async (dt) => {
-          console.log(dt.data.main);
+         // console.log(dt.data.main);
           this.dialog = true;
           this.main = dt.data;
-          console.log(this.main.main);
+         // console.log(this.main.main);
         })
         .catch((err) => err);
     },
@@ -544,11 +544,12 @@ export default {
         .then((dt) => {
           // console.log(dt.data);
           this.main = dt.data;
+          return dt
         })
         .catch((err) => console.log(err));
       this.dialog = false;
       this.$forceUpdate();
-      console.log(this.main.main);
+     // console.log(this.main.main);
     },
     removeSelected(fl) {
       console.log(fl);
@@ -558,16 +559,16 @@ export default {
       const removedFile = this.filesArr.find((el) => el.url === fl.url);
       let ind = this.filesArr.indexOf(removedFile);
 
-      console.log(ind);
+    //  console.log(ind);
       this.filesArr.splice(ind, 1);
-      console.log(this.file_uploads);
+     // console.log(this.file_uploads);
       const lngth = this.file_uploads.length;
       for (let ind = 0; ind <= lngth; ind++) {
         if (removedFile.url === this.file_uploads[ind].url) {
           delete this.file_uploads[ind];
         }
       }
-      console.log(this.file_uploads);
+     // console.log(this.file_uploads);
     },
 
     deleteAlbum() {
@@ -595,7 +596,7 @@ export default {
           name: this.curr_album.name,
         })
         .then((dt) => {
-          console.log(dt.data);
+         // console.log(dt.data);
           this.curr_album = dt.data;
           this.images = this.curr_album.images;
 
@@ -629,21 +630,22 @@ export default {
   watch: {
     main: {
       handler(val, old) {
-        return console.log({ old: old.main, newv: val.main });
+        return { old: old.main, newv: val.main };
       },
       deep: true,
     },
     caption: {
       handler(val, old) {
-        return console.log({ old: old.main, newv: val.main });
+        return { old: old.main, newv: val.main };
       },
       deep: true,
     },
     curr_album: {
       deep: true,
       handler: function (val, oldVal) {
-        console.log(val, oldVal);
+       // console.log(val, oldVal);
         this.images = this.curr_album.images;
+        return {val, oldVal}
       },
     },
   },

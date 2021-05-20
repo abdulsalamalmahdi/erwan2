@@ -35,7 +35,7 @@
   export default {
       name:"Dialog",
       mounted:function(){
-          console.log(this.dialog)
+         // console.log(this.dialog)
       },
   props:{
       dialog:Boolean,

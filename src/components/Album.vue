@@ -215,15 +215,15 @@ export default {
 
   methods: {
     addDesc(n, desc) {
-      console.log(desc);
+      // console.log(desc);
       axios
         .put(`/image/${n._id}`, { desc: desc })
         .then((dt) => {
-          console.log(dt.data);
+          // console.log(dt.data);
             this.el_textArea = n;
       this.el_textArea.show = !this.el_textArea.show;
       this.el_textAreaArr.push(this.el_textArea);
-      console.log(this.el_textAreaArr);
+      // console.log(this.el_textAreaArr);
           this.description = dt.data.desc;
         })
         .catch((err) => console.log(err));
@@ -234,7 +234,7 @@ export default {
       this.el_textArea = n;
       this.el_textArea.show = !this.el_textArea.show;
       this.el_textAreaArr.push(this.el_textArea);
-      console.log(this.el_textAreaArr);
+      // console.log(this.el_textAreaArr);
     },
     handleView() {
       this.isMobile = window.innerWidth <= 990;
@@ -243,10 +243,10 @@ export default {
       let i = this[this.album.category + "s"].findIndex((el) => {
         return el.name === this.album.name;
       });
-      console.log(i);
+      // console.log(i);
       if (i <= this[this.album.category + "s"].length -1 && i >= 0) {
         i--;
-        console.log(i);
+        // console.log(i);
         this.$router.push(
           `/album/${this.album.category}/${
             this[this.album.category + "s"][i]._id
@@ -279,7 +279,7 @@ export default {
     axios
       .get(`/album/${this.$route.params._id}`)
       .then((dt) => {
-        console.log(dt.data);
+        // console.log(dt.data);
         this.album = dt.data;
       })
       .catch((err) => console.log(err));
@@ -288,7 +288,7 @@ export default {
       .get(`/albums/exibitions`)
       .then((dt) => {
         this.exibitions = dt.data;
-        console.log(this.exibitions);
+        // console.log(this.exibitions);
       })
       .catch((err) => err);
 
@@ -298,7 +298,7 @@ export default {
         this.projects = dt.data;
       })
       .catch((err) => err);
-    console.log(this.album);
+   
   },
 
   computed: {

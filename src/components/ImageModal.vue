@@ -1,18 +1,17 @@
 <template>
-  <v-dialog :width="width" ref="dia" @click:outside="$emit('close')" v-if="dialog"  v-model="dialog">
+  <v-dialog height="100%" width="100%" ref="dia" @click:outside="$emit('close')" v-if="dialog"  v-model="dialog">
     
     <v-card  height="100%">
       <NestedModal v-on="$listeners"  :image='image' v-if="isAdmin && !image.album"/>
       <v-img
-      width="100%"
-      height="100%"
+      
       max-height="100%"
       max-width="100%"
       ref="image"
         class="white--text align-end"
-        :src="require(`../../${image.url.replace('./', '')}`)"
+        :src="require(`../../${image.url}`)"
       >
-      
+   {{log(image)}}
         <v-card-title v-text="image.caption"></v-card-title>
       </v-img>
     </v-card>
@@ -28,19 +27,21 @@ export default {
       newImage:{},
     };
   },
-  
+  created: function(){
+    console.log('imagemodal created')
+  },
   mounted: function () {
    console.log('mounted')
   
+console.log(this);
 
   },
   methods:{
-   
+   log(msg){
+console.log(msg)
+   }
   },
-  created:function(){
   
-  },
-
   props: {
     dialog: {
       type: Boolean,
@@ -57,46 +58,68 @@ isAdmin(){
   return this.$store.getters.loggedIn;
 },
 width(){
-  return this.newImage.height> this.newImage.width?"44%":"91%";
+  return this.newImage.height> this.newImage.width?"44%":"51%";
+},
+height(){
+  return this.newImage.height> 1000?"1000px":"800px";
 }
 
   },
   watch:{
 image(){
   this.$nextTick(()=>{
-    console.log(this.$refs.image)
+   
  let imgNew= new Image()
-  imgNew.src= this.$refs.image.src
+  // imgNew.src= this.$refs.image.src
+  imgNew.src= this.image.url
    this.newImage= imgNew;
+ 
   
   })
 }
   },
   components:{
-    NestedModal,
+   NestedModal,
   }
   
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 .v-dialog__content.v-dialog__content--active {
   align-items: center;
     display: flex;
-    height: 100%;
+    height: fit-content;
     justify-content: center;
-    left: 11%;
+    left: 19%;
     pointer-events: none;
     position: fixed;
-    top: 2%;
+    top: 10%;
     transition: 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), z-index 1ms;
-    width: 62%;
+    width: fit-content;
     z-index: 6;
     outline: none;
 
 }
 .v-dialog:not(.v-dialog--fullscreen) {
     max-height: 100%;
+   
+  width: fit-content;
+  height: fit-content;
+
+}
+.v-image{
+  
+
+    height: 567px;
+    max-height: 100%;
+    max-width: 100%;
+    width: 800px;
+    /* left: 0%; */
+
+}
+.v-image__image{
+
 }
 </style>

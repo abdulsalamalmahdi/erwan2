@@ -14,13 +14,13 @@ const passport = require("passport");
 
 
 mongoose.Promise = global.Promise;
-let mongoUrl;
- if (process.env.NODE_ENV === "production") {
-  mongoUrl = process.env.DB;
- } else {
-   mongoUrl = "mongodb://localhost:27017/chat";
- }
-mongoose.connect(process.env.DB, {
+// let mongoUrl;
+//  if (process.env.NODE_ENV === "production") {
+//   mongoUrl = process.env.DB;
+//  } else {
+//    mongoUrl = "mongodb://localhost:27017/chat";
+//  }
+mongoose.connect( "mongodb://localhost:27017/chat", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
@@ -38,12 +38,12 @@ app.options('*', cors())
   app.use(cors());
 app.use(history());
  
-if (process.env.NODE_ENV === 'production') {
- app.use(express.static( __dirname + '/dist/'));
+// if (process.env.NODE_ENV === 'production') {
+//  app.use(express.static( __dirname + '/dist/'));
 
  
 // app.get(/.*/, function (req, res) { res.sendFile( __dirname + '/dist/index.html') });
-}
+//}
 
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({

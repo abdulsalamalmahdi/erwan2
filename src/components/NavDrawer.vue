@@ -100,7 +100,7 @@ export default {
       .get(`/albums/exibitions`)
       .then((dt) => {
         this.exibitions = dt.data;
-        console.log(this.exibitions);
+     //   console.log(this.exibitions);
       })
       .catch((err) => err);
 
@@ -145,7 +145,7 @@ export default {
 }
 .drawer {
   position: absolute;
-  height: 7%;
+  height: fit-content;
   max-height: 10%;
   margin-top: 0px;
   transform: translateY(0px);

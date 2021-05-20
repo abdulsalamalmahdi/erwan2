@@ -66,7 +66,7 @@ const storage = multer.diskStorage({
 
 
     image = await Image.create({
-      image_name: fileName, url: DIR + '/' + album.name + '/' + fileName, album: album._id?album._id:null,
+      image_name: fileName, url: 'public/albums' + '/' + album.name + '/' + fileName, album: album._id?album._id:null,
       main: file.fieldname === 'file' ? true : false,
     })
     image = await image.populate('album').execPopulate();
@@ -105,6 +105,8 @@ var upload = multer({
       cb(null, true);
     } else {
       cb(null, false);
+      console.log(file)
+      Image.deleteOne({image_name:file.filename})
       return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
     }
   }
@@ -449,7 +451,7 @@ router.post("/login", async (req, res) => {
 });
 router.delete('/image/:_id',async (req, res)=>{
      const {_id}= req.params;
-   console.log(_id)
+ await  console.log(_id)
   const image_temp=  await Image.findById(_id).then(async re=>{
     console.log(re)
       await fs.unlinkSync(re.url);
@@ -471,5 +473,11 @@ console.log(image_temp);
    
 
   
+})
+
+router.delete('/images', (req, res)=>{
+  Image.deleteMany({})
+  .then(res.send('all deleted'))
+  .catch(err => res.send(err))
 })
 module.exports = router;

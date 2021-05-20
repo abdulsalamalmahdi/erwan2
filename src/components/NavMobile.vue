@@ -63,7 +63,7 @@ export default {
     axios
       .get(`/albums`)
       .then((dt) => {
-        console.log(dt);
+        //console.log(dt);
         this.exibitions = dt.data;
       })
       .catch((err) => err);

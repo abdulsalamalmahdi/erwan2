@@ -107,7 +107,7 @@ export default {
           'Content-Type': 'application/json'
       }})
       .then((dt) => {
-        console.log(dt);
+        // console.log(dt);
         this.albums = dt.data;
       })
       .catch((err) => err);
@@ -116,7 +116,7 @@ export default {
       .get(`/albums/exibitions`)
       .then((dt) => {
         this.exibitions = dt.data;
-        console.log(this.exibitions);
+        // console.log(this.exibitions);
       })
       .catch((err) => err);
 
@@ -133,7 +133,7 @@ export default {
         this.workshops = dt.data;
       })
       .catch((err) => err);
-      console.log(this.exibitions)
+    //  console.log(this.exibitions)
   },
   created:function(){
 

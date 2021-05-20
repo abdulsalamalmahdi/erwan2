@@ -22,9 +22,9 @@ export default {
    
   },
   mounted: function () {
-    console.log(this.dialog);
-    console.log(this.image);
-    console.log(this.isMobile)
+    // console.log(this.dialog);
+    // console.log(this.image);
+    // console.log(this.isMobile)
   },
   props: {
     dialog: {
@@ -52,8 +52,9 @@ export default {
     position: fixed;
     transition: 0.2s cubic-bezier(0.25, 0.8, 0.25, 1), z-index 1ms;
     width: 100%;
-    z-index: 6;
+    /* z-index: 6; */
     outline: none;
+        top: 11rem;
 }
 
 </style>

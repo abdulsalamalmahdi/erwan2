@@ -32,14 +32,16 @@
         class="d-flex child-flex ma-0 pa-0"
         :cols="isMobile ? 4 : 1"
       >
-      
+        <!-- <img v-lazy="require(`../../${n.url.replace('./', '')}`)" > -->
         <v-img
           @click="open(n)"
           @close="close"
+        
           :src="require(`../../${n.url.replace('./', '')}`)"
           aspect-ratio="1"
           class="grey lighten-2"
         >
+       
          <v-btn v-if="!n.album && isAdmin" icon color="primary" @click="deleteImg(n)">
               <v-icon>mdi-delete</v-icon>
             </v-btn>
@@ -56,7 +58,6 @@
     </v-row>
   </v-container>
 </template>
-
 
 <script>
 import ImageModalMob from "./ImageModalMob";
@@ -79,13 +80,15 @@ export default {
     },
   },
   mounted: function () {
-    console.log(this.image_dialog);
+    // console.log(this.image_dialog);
+
+
     axios
       .get(`/albums/`,{headers:{
           'Content-Type': 'application/json'
       }})
       .then((data) => {
-        console.log(data);
+      //  console.log(data);
         this.albums = data.data;
       })
       .catch((err) => err);
@@ -102,7 +105,7 @@ export default {
       .get(`/albums/exibitions`)
       .then((dt) => {
         this.exibitions = dt.data;
-        console.log(this.exibitions);
+      //  console.log(this.exibitions);
       })
       .catch((err) => err);
 
@@ -117,11 +120,11 @@ export default {
   },
   methods: {
     fetchImgs(){
-      console.log('home emitted')
+      // console.log('home emitted')
        axios
       .get(`/images/`)
       .then((data) => {
-        console.log(data.data);
+        // console.log(data.data);
         this.images = data.data;
       })
       .catch((err) => err);
@@ -129,8 +132,8 @@ export default {
     close() {
       this.dialog = false;
       this.viewImage = {};
-      console.log(this.viewImage);
-      console.log(this.dialog);
+      // console.log(this.viewImage);
+      // console.log(this.dialog);
     },
     scale(e) {
       e.target.style.transform = "scale(1.1)";
@@ -142,10 +145,11 @@ export default {
       this.$router.push(`/album/${_id}`);
     },
     open(n) {
-      this.viewImage = n;
       this.image_dialog = true;
-      console.log(this.viewImage);
-      console.log(this.image_dialog);
+      this.viewImage = n;
+      
+      // console.log(this.viewImage);
+      // console.log(this.image_dialog);
     },
      deleteImg(n) {
       let img = this.images.find((im) => im._id === n._id);
@@ -153,13 +157,16 @@ export default {
         const ind = this.images.indexOf(img);
         this.images.splice(ind, 1);
       }
+      console.log(n.album)
 
       axios
         .delete(`/image/${n._id}`, {
-          name: this.curr_album.name,
+          name: n.album|| 'random',
         })
         .then((dt) => {
-          console.log(dt.data);
+           console.log("deleted "+dt.data);
+
+
           this.curr_album = dt.data;
           this.images = this.curr_album.iamges;
 
@@ -167,6 +174,9 @@ export default {
         })
         .catch((err) => console.log(err));
     },
+    log(msg){
+      console.log(msg)
+    }
   },
   computed: {
     exibitions: function () {
@@ -257,4 +267,5 @@ export default {
   max-width: 100%;
   margin: 0;
 }
+
 </style>

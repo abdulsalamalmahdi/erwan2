@@ -218,11 +218,11 @@ export default {
       .get("/albums")
       .then(async (dt) => {
         this.albums.push(...dt.data);
-        console.log(this.albums[0].name);
+      //  console.log(this.albums[0].name);
       })
       .catch((err) => {
         this.errors = err.message;
-        console.log(this.errors);
+       // console.log(this.errors);
       });
   },
   methods: {
@@ -239,7 +239,7 @@ export default {
       objKeys.map((ok) => {
         this.filesArr.push(files[ok]);
       });
-console.log(this.filesArr)
+//console.log(this.filesArr)
       // let notJPG = objVals.filter(
       //   (fl) => fl.type !== "image/jpeg" && fl.type !== "image/tiff"
       // );
@@ -265,7 +265,7 @@ async supmit() {
         formData.append("file[]", fl);
       });
 
-      console.log(formData);
+     // console.log(formData);
       try {
         await axios
           .post(
@@ -278,7 +278,7 @@ async supmit() {
           .catch((err) => err);
         this.filesArr = [];
       } catch (err) {
-        console.log(err);
+       // console.log(err);
       }
     },
     async validate() {
@@ -299,7 +299,7 @@ async supmit() {
           }
         })
         .catch((err) => {
-          console.log(err.response.data);
+         // console.log(err.response.data);
           this.serverError = err.response.data;
         
           this.successMsg = "";
@@ -309,12 +309,12 @@ async supmit() {
      
     },
     chosedAbum(album) {
-      console.log(album._id);
+     // console.log(album._id);
       this.current_album = album;
       this.$router.push(`/admin/album/${album.category}/${album._id}`);
     },
     combox() {
-      console.log(this.select);
+     // console.log(this.select);
     },
   },
   watch:{
