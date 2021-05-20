@@ -3,7 +3,7 @@ const controllers = require('./controllers');
 const router= express.Router();
 
 // const Album = require('../models/Album')
-router.get('/', controllers.all)
+router.get('/', controllers.getAll)
 router.post('/', controllers.newAlbum)
 
 module.exports= router;
