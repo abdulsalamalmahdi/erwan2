@@ -3,7 +3,7 @@ const Image= require('../../models/Image.js');
 const  Album= require('../../models/Album');
 const controllers = {}
 
-controllers.getAll= (req, res)=>{
+controllers.getAll= async (req, res)=>{
 
     Image.find({})
     .then(dt=> res.send(dt))
@@ -50,8 +50,9 @@ res.send(err)
 }
 
 controllers.getMainImg= async (req, res)=>{
-
+  
   const { _id } = req.params;
+  console.log(_id)
   await Image.find({ album: _id, main: true }).then(async dt => {
     await console.log(dt)
     res.json(dt[0])

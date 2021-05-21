@@ -5,7 +5,9 @@ let express = require('express'),
   let history = require('connect-history-api-fallback');
   //dbConfig = require('./db/database');
 
-
+  history({
+  verbose: true
+  })
 // Routes to Handle Request
 // const userRoute = require('./routers')
 const userRoute = require('./routes/router');
@@ -33,11 +35,11 @@ mongoose.connect( "mongodb://localhost:27017/chat", {
 )
 
 // Setup Express.js
-const app = express();
-app.options('*', cors())
+ const app = express();
+ app.options('*', cors())
 
   app.use(cors());
-app.use(history());
+ //app.use(history());
  
 // if (process.env.NODE_ENV === 'production') {
 //  app.use(express.static( __dirname + '/dist/'));
@@ -46,12 +48,12 @@ app.use(history());
 // app.get(/.*/, function (req, res) { res.sendFile( __dirname + '/dist/index.html') });
 //}
 
-app.use(bodyParser.json({limit: '50mb'}));
-app.use(bodyParser.urlencoded({
-  extended: true,
-  limit: '50mb',
-  parameterLimit: 1000000
-}));
+  // app.use(express.json({limit: '50mb'}));
+  // app.use(express.urlencoded({
+  //   extended: true,
+  //   limit: '50mb',
+  //   parameterLimit: 1000000
+  // }));
 
 
 
@@ -60,8 +62,9 @@ app.use(bodyParser.urlencoded({
 
 
 // API Route
-app.use('/api', userRoute)
+ app.use('/api', userRoute)
 
+ 
 const port = process.env.PORT || 4000;
  app.listen(port, () => {
   console.log('Connected to port ' + port)
